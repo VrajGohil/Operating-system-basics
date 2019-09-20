@@ -6,14 +6,12 @@ for ((i=2;i<n;i++))
 	v=$((n % i))
 	if [ $v -eq 0 ]
 	then
-		p=0
-	else
-		p=1
+		p=$((p+1))
 	fi
 done
-if [ $p -eq 1 ]
+if [ $p -eq 0 ]
 then
-		echo "Number is not prime"
+		echo "Number is prime"
 	else
-		echo "Number is Prime"
+		echo "Number is not Prime"
 	fi
