@@ -51,37 +51,35 @@ int main()
         printf("\nEnter the value for element at positon %d : ", i + 1);
         scanf("%d", &sequence[i]);
     }
-    //fill frames initially till frame size
+    // fill frames initially with -1
     for (int i = 0; i < frameSize; i++)
     {
         frame[i] = -1;
-        // pageFaults++;
-        // frame[i] = sequence[i];
-        // insert(frame[i]);
     }
-    //for rest of the sequence
+    //brain
     int notPresent = 1;
     int valueToChange;
     for (int currentPostion = 0; currentPostion < sequenceLenght; currentPostion++)
     {
         notPresent = 1;
+        insert(sequence[currentPostion]);
         for (int i = 0; i < frameSize; i++)
         {
             if (frame[i] == sequence[currentPostion])
             {
                 notPresent = 0;
             }
+            //when frames are empty
+            //-1 means position is empty
             else if(frame[i] == -1){
                 pageFaults++;
                 frame[i] = sequence[currentPostion];
-                insert(frame[i]);
                 notPresent = 0;
                 break;
             }
         }
         if (notPresent == 1)
         {
-            insert(sequence[currentPostion]);
             valueToChange = delete ();
             for (int i = 0; i < frameSize; i++)
             {
@@ -93,7 +91,7 @@ int main()
                 }
             }
         }
-        //print the postion
+        //print the working
         for(int i=0;i<frameSize;i++){
             printf("| %d |",frame[i]);
         }
