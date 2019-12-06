@@ -1,40 +1,4 @@
 #include <stdio.h>
-
-#define MAX 50
-int queue_array[MAX];
-int rear = -1;
-int front = -1;
-void insert(int add_item)
-{
-    if (rear == MAX - 1)
-        printf("Queue is Full!!!! \n");
-    else
-    {
-        if (front == -1)
-        {
-            front = 0;
-        }
-        rear = rear + 1;
-        queue_array[rear] = add_item;
-    }
-}
-
-int delete ()
-{
-    int value;
-    if (front == -1 || front > rear)
-    {
-        printf("Queue Empty!!! \n");
-        return 0;
-    }
-    else
-    {
-        value = queue_array[front];
-        front = front + 1;
-    }
-    return value;
-}
-
 int main()
 {
     int sequenceLenght;
@@ -46,6 +10,8 @@ int main()
     scanf("%d", &frameSize);
     int frame[frameSize];
     int sequence[sequenceLenght];
+    int counter[frameSize];
+    int count = 0;
     for (int i = 0; i < sequenceLenght; i++)
     {
         printf("\nEnter the value for element at positon %d : ", i + 1);
@@ -55,38 +21,52 @@ int main()
     for (int i = 0; i < frameSize; i++)
     {
         frame[i] = -1;
+        counter[i] = 0;
     }
     //brain
     int notPresent = 1;
+    int min;
     int valueToChange;
     for (int currentPostion = 0; currentPostion < sequenceLenght; currentPostion++)
-    {
+    {  
+        min = 100;
+        count++;
+         //1 means not present
         notPresent = 1;
-        insert(sequence[currentPostion]);
         for (int i = 0; i < frameSize; i++)
         {
             if (frame[i] == sequence[currentPostion])
-            {
+            {   
+                //0 means is present
+                counter[i] = count;
                 notPresent = 0;
+                break;
             }
             //when frames are empty
             //-1 means position is empty
             else if(frame[i] == -1){
                 pageFaults++;
                 frame[i] = sequence[currentPostion];
+                counter[i] = count;
                 notPresent = 0;
                 break;
             }
         }
         if (notPresent == 1)
         {
-            valueToChange = delete ();
+            for(int i=0;i<frameSize;i++){
+                if(counter[i] < min){
+                    min = counter[i];
+                    valueToChange = frame[i];
+                }
+            }
             for (int i = 0; i < frameSize; i++)
             {
                 if (valueToChange == frame[i])
                 {   
                     pageFaults++;
                     frame[i] = sequence[currentPostion];
+                    counter[i] = count;
                     break;
                 }
             }
@@ -100,3 +80,10 @@ int main()
     printf("Total page faults = %d\n", pageFaults);
     return 0;
 }
+
+// 1 2 3 4 5 4 3 2 1
+/*
+1-4
+2-5
+3
+*/
