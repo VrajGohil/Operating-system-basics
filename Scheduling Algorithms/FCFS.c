@@ -10,7 +10,7 @@ void swap(int *xp, int *yp)
     *yp = temp; 
 }
 int main(){
-    int task[5][5];
+    int task[5][6];
     for (int i=0;i<5;i++){
         printf("Enter the arrival time and burst time for process P%d :", i+1);
         task[i][0]=i+1;

@@ -1,5 +1,5 @@
 requestSequence = [int(i) for i in input("Enter the sequence :").split()]
-headPostion = int(input("Enter the initial head postion :"))
+headPostion = int(input("Enter the initial head position :"))
 requestSequence.sort()
 lessThenHead = [0]
 greaterThenHead = []

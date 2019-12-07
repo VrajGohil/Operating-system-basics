@@ -13,7 +13,7 @@ int main(){
     int processesCompleted = 0;
     int isProcessArrived[noOfResource];
     int isDeadlock = 0;
-    //input for total resource    int totalRequestedResource;
+    //input for total resource    
     for(int i=0;i<noOfResource;i++){
         printf("\nEnter the total resource available for R[%d] :",i);
         scanf("%d",&totalResource[i]);
@@ -25,7 +25,7 @@ int main(){
         for(int j=0;j<noOfResource;j++){
             printf("\nEnter the value for P[%d] R[%d] allocated :",i,j);
             scanf("%d",&allocatedResource[i][j]);
-            availableResource[j]=-allocatedResource[i][j];
+            availableResource[j]-=allocatedResource[i][j];
         }
     }
     //input for requested Resources
@@ -52,7 +52,8 @@ int main(){
         for(int i=0;i<noOfProcess;i++){
             isDeadlock = 1;
             if(isProcessArrived[i] == 0){
-                int lastResourceIndex;
+                int lastResourceIndex;{
+        }
                 for(lastResourceIndex=0;lastResourceIndex<noOfResource;lastResourceIndex++){
                     if(requestedResource[i][lastResourceIndex]>availableResource[lastResourceIndex]){
                         break;
@@ -71,13 +72,13 @@ int main(){
                 }
             }
         }
-        if(isDeadlock == 1){
-        printf("\n There is Deadloack");
-        break;
+            if(isDeadlock == 1){
+            printf("\n There is Deadloack");
+            break;
+            }
         }
-        else{
+        if(isDeadlock == 0){
          printf("\n No Deadlock");
-        }
     }
     return 0;
 }

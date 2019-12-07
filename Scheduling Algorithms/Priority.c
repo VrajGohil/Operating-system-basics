@@ -14,7 +14,7 @@ int main(){
     int bt[5];
     printf("Smaller number has higher priority\n");
     for (int i=0;i<5;i++){
-        printf("Enter the arrival time and burst time for process P%d :", i+1);
+        printf("Enter the arrival time, burst time and priority for process P%d :", i+1);
         task[i][0]=i+1;
         scanf("%d %d %d", &task[i][1], &task[i][2], &task[i][6]);
         bt[i]=task[i][2];
